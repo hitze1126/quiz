@@ -1,6 +1,9 @@
 const questions = [
     { question: "Seit wann gibt es die Freaks?", options: ["2016", "2017", "2018", "2019"], answer: 2 },
-    { question: "Wo war die 1. Halle der Freaks?", options: ["Bergen", "Nardt", "Hoyerswerda", "Bernsdorf"], answer: 0 },    
+    { question: "Wo war die 1. Halle der Freaks?", options: ["Bergen", "Nardt", "Hoyerswerda", "Bernsdorf"], answer: 0 },
+    { question: "Welches Treffen war das erste mit Masken", options: ["Bautzen", "Cottbus", "Dresden", "Deuzschbaselitz"], answer: 1 },
+    { question: "Wieviele Gründungsmitglieder haben die Freaks?", options: ["1", "2", "3", "4"], answer: 2 },
+    { question: "Welches Auto war das 1. Projekt?", options: ["Derby", "Polo", "Golf 3", "Passat 32b"], answer: 3 },    
 ];
 
 let currentQuestion = 0;
