@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="quiz-card">
+        <div id="start-screen">
+            <h1>Willkommen zum Quiz! 🏆</h1>
+            <p>Gib deinen Instagram-Namen ein, um zu starten:</p>
+            <input type="text" id="insta-input" placeholder="@dein.name" required>
+            <button onclick="startQuiz()">Quiz starten</button>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div id="question-number">Frage 1 von 10</div>
+            <h2 id="question-text">Frage lädt...</h2>
+            <div id="options-container"></div>
+        </div>
+
+        <div id="end-screen" class="hidden">
+            <h1>Fertig! 🎉</h1>
+            <p id="score-text"></p>
+            <p>Deine Punkte werden jetzt übermittelt...</p>
+
+            <form id="quiz-form" action=https://formspree.io/f/xzebzadv method="POST">
+                <input type="hidden" name="Instagram" id="form-insta">
+                <input type="hidden" name="Punkte" id="form-score">
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
