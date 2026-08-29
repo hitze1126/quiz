@@ -1,6 +1,6 @@
 const questions = [
-    { question: "Seit wann gibt es die Freaks?", options: ["2016", "2017", "2018", "2019"], answer: 3 },
-    { question: "Wo war die 1. Halle der Freaks?", options: ["Bergen", "Nardt", "Hoyerswerda", "Bernsdorf"], answer: 1 },    
+    { question: "Seit wann gibt es die Freaks?", options: ["2016", "2017", "2018", "2019"], answer: 2 },
+    { question: "Wo war die 1. Halle der Freaks?", options: ["Bergen", "Nardt", "Hoyerswerda", "Bernsdorf"], answer: 0 },    
 ];
 
 let currentQuestion = 0;
