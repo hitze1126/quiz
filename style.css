@@ -28,6 +28,16 @@ body {
     text-align: center;
 }
 
+#start-screen,
+#quiz-screen,
+#end-screen {
+    background: rgba(0, 0, 0, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 24px 20px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
 #start-screen h1,
 #start-screen p,
 #quiz-screen h2,
@@ -53,7 +63,7 @@ button, .option-btn {
     padding: 12px;
     margin: 8px 0;
     border: none;
-    background-color: #000000;
+    background-color: #2d2a2a;
     color: white;
     border-radius: 8px;
     font-size: 16px;
@@ -62,17 +72,17 @@ button, .option-btn {
 }
 
 button:hover, .option-btn:hover {
-    background-color: #5c2383;
+    background-color: #f10b0b;
 }
 
 .option-btn {
-    background-color: #f0f0f0;
-    color: #333;
-    text-align: left;
+    background-color: #2d2a2a;
+    color: #ffffff;
+    text-align: center;
 }
 
 #question-number {
     font-size: 14px;
-    color: #666;
+    color: #000000;
     margin-bottom: 10px;
 }
