@@ -4,23 +4,37 @@
 }
 
 body {
-    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+        url('Assets/logo.jpg') center center / contain no-repeat,
+        #000000;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
     padding: 20px;
+    color: #ffffff;
 }
 
 .quiz-card {
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    background: transparent;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
     width: 100%;
     max-width: 450px;
     text-align: center;
+}
+
+#start-screen h1,
+#start-screen p,
+#quiz-screen h2,
+#end-screen h1,
+#end-screen p,
+#question-number {
+    color: #ffffff;
 }
 
 .hidden { display: none; }
@@ -39,7 +53,7 @@ button, .option-btn {
     padding: 12px;
     margin: 8px 0;
     border: none;
-    background-color: #833ab4;
+    background-color: #000000;
     color: white;
     border-radius: 8px;
     font-size: 16px;
