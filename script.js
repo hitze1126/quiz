@@ -9,6 +9,7 @@ const questions = [
 let currentQuestion = 0;
 let score = 0;
 let instaName = "";
+let wrongAnswers = [];
 
 function startQuiz() {
     const input = document.getElementById("insta-input").value.trim();
@@ -40,9 +41,19 @@ function showQuestion() {
 }
 
 function selectOption(index) {
-    if (index === questions[currentQuestion].answer) {
+    const q = questions[currentQuestion];
+
+    if (index === q.answer) {
         score++;
+    } else {
+        wrongAnswers.push({
+            question: q.question,
+            selected: q.options[index],
+            correct: q.options[q.answer],
+            clicked: q.options[index]
+        });
     }
+
     currentQuestion++;
 
     if (currentQuestion < questions.length) {
@@ -57,9 +68,14 @@ function finishQuiz() {
     document.getElementById("end-screen").classList.remove("hidden");
     document.getElementById("score-text").innerText = `${instaName}, du hast ${score} von ${questions.length} Punkten erreicht!`;
 
+    const wrongText = wrongAnswers.length
+        ? wrongAnswers.map((item, index) => `Frage ${index + 1}: ${item.question} | angeklickt: ${item.clicked} | richtig: ${item.correct}`).join("\n")
+        : "Keine falschen Antworten";
+
     // Formular ausfüllen und automatisch an Formspree senden
     document.getElementById("form-insta").value = instaName;
     document.getElementById("form-score").value = `${score} / ${questions.length}`;
+    document.getElementById("form-wrong").value = wrongText;
     
     setTimeout(() => {
         document.getElementById("quiz-form").submit();
