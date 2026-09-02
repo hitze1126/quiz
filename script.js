@@ -4,7 +4,7 @@ const questions = [
     { question: "Welches Treffen war das erste mit Masken", options: ["Bautzen", "Cottbus", "Dresden", "Deutschbaselitz"], answer: 1 },
     { question: "Wieviele Gründungsmitglieder haben die Freaks?", options: ["1", "2", "3", "4"], answer: 2 },
     { question: "Welches Auto war das 1. Projekt?", options: ["Derby", "Polo", "Golf 3", "Passat 32b"], answer: 3 },
-    { question: "Wie heißt das sagenumwobene Getränk?", options: ["Freakin-Martini", "Altblechgin", "Freaks'o Caner", "Darkderby"], answer: 2 },
+    { question: "Wie heißt das sagenumwobene Getränk?", options: ["Freakin Martini", "Altblech Gin", "Freaks'o Caner", "Darkderby"], answer: 2 },
     { question: "Wann fand das letzte BBQ statt?", options: ["25.10.26", "18.10.26", "01.11.26", "11.10.26"], answer: 0 },    
 ];
 
@@ -36,7 +36,7 @@ function showQuestion() {
     q.options.forEach((option, index) => {
         const btn = document.createElement("button");
         btn.classList.add("option-btn");
-        btn.innerText = option;
+        btn.innerHTML = `<img class="option-img-left" src="Assets/bg.png" alt=""><span>${option}</span><img class="option-img-right" src="Assets/bg.png" alt="">`;
         btn.onclick = () => selectOption(index);
         container.appendChild(btn);
     });

@@ -69,6 +69,8 @@ button, .option-btn {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.2s;
+    position: relative;
+    text-align: center;
 }
 
 button:hover, .option-btn:hover {
@@ -78,7 +80,28 @@ button:hover, .option-btn:hover {
 .option-btn {
     background-color: #2d2a2a;
     color: #ffffff;
-    text-align: center;
+}
+
+.option-img-left {
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    opacity: 0.6;
+}
+
+.option-img-right {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    opacity: 0.6;
 }
 
 #question-number {
