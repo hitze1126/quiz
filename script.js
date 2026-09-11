@@ -1,7 +1,7 @@
 const questions = [
     { question: "Seit wann gibt es die Freaks?", options: ["2016", "2017", "2018", "2019"], answer: 2 },
     { question: "Wo war die 1. Halle der Freaks?", options: ["Bergen", "Nardt", "Hoyerswerda", "Bernsdorf"], answer: 0 },
-    { question: "Welches Treffen war das erste mit Masken", options: ["Bautzen", "Cottbus", "Dresden", "Deutschbaselitz"], answer: 1 },
+    { question: "Welches Treffen war das erste mit Masken?", options: ["Bautzen", "Cottbus", "Dresden", "Deutschbaselitz"], answer: 1 },
     { question: "Wieviele Gründungsmitglieder haben die Freaks?", options: ["1", "2", "3", "4"], answer: 2 },
     { question: "Welches Auto war das 1. Projekt?", options: ["Derby", "Polo", "Golf 3", "Passat 32b"], answer: 3 },
     { question: "Wie heißt das sagenumwobene Getränk?", options: ["Freakin Martini", "Altblech Gin", "Freaks'o Caner", "Darkderby"], answer: 2 },
@@ -12,6 +12,33 @@ let currentQuestion = 0;
 let score = 0;
 let instaName = "";
 let wrongAnswers = [];
+
+function getLeaderboard() {
+    const stored = localStorage.getItem("freaksQuizLeaderboard");
+    try {
+        return stored ? JSON.parse(stored) : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveLeaderboard(entries) {
+    localStorage.setItem("freaksQuizLeaderboard", JSON.stringify(entries));
+}
+
+function buildLeaderboardText() {
+    const entries = getLeaderboard();
+
+    if (!entries.length) {
+        return "Noch keine Einträge vorhanden";
+    }
+
+    const sorted = [...entries].sort((a, b) => b.score - a.score);
+    return sorted
+        .slice(0, 5)
+        .map((entry, index) => `${index + 1}. ${entry.name}: ${entry.score} Punkte`)
+        .join("\n");
+}
 
 function startQuiz() {
     const input = document.getElementById("insta-input").value.trim();
@@ -74,10 +101,24 @@ function finishQuiz() {
         ? wrongAnswers.map((item, index) => `Frage ${index + 1}: ${item.question} | angeklickt: ${item.clicked} | richtig: ${item.correct}`).join("\n")
         : "Keine falschen Antworten";
 
-    
+    const leaderboard = getLeaderboard();
+    leaderboard.push({
+        name: instaName,
+        score: score,
+        date: new Date().toISOString()
+    });
+    saveLeaderboard(leaderboard);
+
+    const topEntry = [...leaderboard].sort((a, b) => b.score - a.score)[0];
+    const topText = topEntry
+        ? `Top Scorer: ${topEntry.name} mit ${topEntry.score} Punkten`
+        : "Top Scorer: Noch keiner";
+
     document.getElementById("form-insta").value = instaName;
     document.getElementById("form-score").value = `${score} / ${questions.length}`;
     document.getElementById("form-wrong").value = wrongText;
+    document.getElementById("form-top").value = topText;
+    document.getElementById("form-leaderboard").value = buildLeaderboardText();
     
     setTimeout(() => {
         document.getElementById("quiz-form").submit();
