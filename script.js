@@ -7,7 +7,8 @@ const questions = [
     { question: "Wie heißt das sagenumwobene Getränk?", options: ["Freakin Martini", "Altblech Gin", "Freaks'o Caner", "Darkderby"], answer: 2 },
     { question: "Welche Hauptfarben haben die Freaks?", options: ["rot/schwarz", "schwarz/weiß", "weiß/schwarz", "rot/blau"], answer: 0 },
     { question: "Wieviel aktive Mitglieder haben die Freaks?", options: ["10", "11", "12", "13"], answer: 3 },
-    { question: "Welches Motto hatte das letzte BBQ?", options: ["Jack-o'-lantern", "Trick or Treat", "Apple Bobbing", "Nightmare before Freaks"], answer: 3 },    
+    { question: "Welches Motto hatte das letzte BBQ?", options: ["Jack-o'-lantern", "Trick or Treat", "Apple Bobbing", "Nightmare before Freaks"], answer: 1 },
+    { question: "Wann war das letzte BBQ?", options: ["4.10.2025", "11.10.2025", "18.10.2025", "25.10.2025"], answer: 1 },    
 ];
 
 let currentQuestion = 0;
