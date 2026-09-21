@@ -46,6 +46,20 @@ body {
     border-radius: 18px;
     padding: 24px 20px;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+    position: relative;
+    z-index: 2;
+}
+
+.quiz-logo-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(75vw, 420px);
+    max-width: 100%;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 1;
 }
 
 #start-screen h1,
