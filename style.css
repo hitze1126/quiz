@@ -6,14 +6,14 @@
 body {
     background:
         linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-        url('Assets/logost.png') center center / 80% auto no-repeat,
+        url('Assets/logost.png') top center / 80% auto no-repeat,
         #000000;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 0;
-    padding: 20px;
+    padding: 90px 20px 20px;
     color: #ffffff;
 }
 
@@ -39,6 +39,7 @@ body {
     max-width: 450px;
     text-align: center;
     position: relative;
+    margin-top: 10px;
     z-index: 1;
 }
 
