@@ -5,8 +5,8 @@
 
 body {
     background:
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('Assets/logost.png') center center / 90% auto no-repeat,
+        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+        url('Assets/logost.png') center center / 80% auto no-repeat,
         #000000;
     min-height: 100vh;
     display: flex;
@@ -15,16 +15,18 @@ body {
     margin: 0;
     padding: 20px;
     color: #ffffff;
-    background-attachment: fixed;
 }
 
-@media (max-width: 480px) {
-    body {
-        background:
-            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url('Assets/logost.png') center center / 110% auto no-repeat,
-            #000000;
-    }
+.quiz-top-logo {
+    position: fixed;
+    top: 18vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(75vw, 420px);
+    height: auto;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 3;
 }
 
 .quiz-card {
@@ -50,18 +52,6 @@ body {
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
     position: relative;
     z-index: 2;
-}
-
-.quiz-logo-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(75vw, 420px);
-    max-width: 100%;
-    opacity: 0.25;
-    pointer-events: none;
-    z-index: 3;
 }
 
 #start-screen h1,
