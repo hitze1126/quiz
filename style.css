@@ -56,19 +56,9 @@ audio {
 #start-screen p,
 #quiz-screen h2,
 #end-screen h1,
-#end-screen h2,
 #end-screen p,
 #question-number {
     color: #ffffff;
-}
-
-#leaderboard-display {
-    margin: 16px 0;
-    color: #ffffff;
-    font: inherit;
-    line-height: 1.6;
-    text-align: left;
-    white-space: pre-wrap;
 }
 
 .hidden { display: none; }

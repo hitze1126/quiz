@@ -8,7 +8,7 @@ const questions = [
     { question: "Welche Hauptfarben haben die Freaks?", options: ["rot/schwarz", "schwarz/weiß", "weiß/schwarz", "rot/blau"], answer: 0 },
     { question: "Wieviel aktive Mitglieder haben die Freaks?", options: ["10", "11", "12", "13"], answer: 3 },
     { question: "Welches Motto hatte das letzte BBQ?", options: ["Jack-o'-lantern", "Trick or Treat", "Apple Bobbing", "Nightmare before Freaks"], answer: 1 },
-    { question: "Wann war das letzte BBQ?", options: ["4.10.2025", "11.10.2025", "18.10.2025", "25.10.2025"], answer: 1 },    
+    { question: "Wann war das letzte BBQ?", options: ["4.10.2025", "11.10.2025", "18.10.2025", "25.10.2025"], answer: 3 },    
 ];
 
 let currentQuestion = 0;
@@ -117,8 +117,6 @@ function finishQuiz() {
         ? `Top Scorer: ${topEntry.name} mit ${topEntry.score} Punkten`
         : "Top Scorer: Noch keiner";
     const leaderboardText = buildLeaderboardText();
-
-    document.getElementById("leaderboard-display").innerText = leaderboardText;
 
     document.getElementById("form-insta").value = instaName;
     document.getElementById("form-score").value = `${score} / ${questions.length}`;
