@@ -5,8 +5,9 @@ const questions = [
     { question: "Wieviele Gründungsmitglieder haben die Freaks?", options: ["1", "2", "3", "4"], answer: 2 },
     { question: "Welches Auto war das 1. Projekt?", options: ["Derby", "Polo", "Golf 3", "Passat 32b"], answer: 3 },
     { question: "Wie heißt das sagenumwobene Getränk?", options: ["Freakin Martini", "Altblech Gin", "Freaks'o Caner", "Darkderby"], answer: 2 },
-    { question: "Welche Hauptfarben haben die Freaks?", options: ["schwarz/rot", "schwarz/weiß", "weiß/schwarz", "rot/blau"], answer: 0 },
-    { question: "Wieviel aktive Mitglieder haben die Freaks?", options: ["10", "11", "12", "13"], answer: 3 },    
+    { question: "Welche Hauptfarben haben die Freaks?", options: ["rot/schwarz", "schwarz/weiß", "weiß/schwarz", "rot/blau"], answer: 0 },
+    { question: "Wieviel aktive Mitglieder haben die Freaks?", options: ["10", "11", "12", "13"], answer: 3 },
+    { question: "Welches Motto hatte das letzte BBQ?", options: ["Jack-o'-lantern", "Trick or Treat", "Apple Bobbing", "Nightmare before Freaks"], answer: 3 },    
 ];
 
 let currentQuestion = 0;
@@ -36,7 +37,7 @@ function buildLeaderboardText() {
 
     const sorted = [...entries].sort((a, b) => b.score - a.score);
     return sorted
-        .slice(0, 5)
+        .slice(0, 10)
         .map((entry, index) => `${index + 1}. ${entry.name}: ${entry.score} Punkte`)
         .join("\n");
 }
@@ -114,12 +115,15 @@ function finishQuiz() {
     const topText = topEntry
         ? `Top Scorer: ${topEntry.name} mit ${topEntry.score} Punkten`
         : "Top Scorer: Noch keiner";
+    const leaderboardText = buildLeaderboardText();
+
+    document.getElementById("leaderboard-display").innerText = leaderboardText;
 
     document.getElementById("form-insta").value = instaName;
     document.getElementById("form-score").value = `${score} / ${questions.length}`;
     document.getElementById("form-wrong").value = wrongText;
     document.getElementById("form-top").value = topText;
-    document.getElementById("form-leaderboard").value = buildLeaderboardText();
+    document.getElementById("form-leaderboard").value = leaderboardText;
     
     setTimeout(() => {
         document.getElementById("quiz-form").submit();
