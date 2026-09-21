@@ -15,6 +15,20 @@ let currentQuestion = 0;
 let score = 0;
 let instaName = "";
 let wrongAnswers = [];
+let firestore = null;
+
+const hasFirebaseConfig = window.firebaseConfig
+    && window.firebaseConfig.apiKey !== "DEINE_API_KEY"
+    && window.firebaseConfig.projectId !== "DEIN_PROJEKT";
+
+if (hasFirebaseConfig) {
+    try {
+        firebase.initializeApp(window.firebaseConfig);
+        firestore = firebase.firestore();
+    } catch (error) {
+        console.error("Firebase konnte nicht gestartet werden.", error);
+    }
+}
 
 function getLeaderboard() {
     const stored = localStorage.getItem("freaksQuizLeaderboard");
@@ -29,8 +43,7 @@ function saveLeaderboard(entries) {
     localStorage.setItem("freaksQuizLeaderboard", JSON.stringify(entries));
 }
 
-function buildLeaderboardText() {
-    const entries = getLeaderboard();
+function buildLeaderboardText(entries) {
 
     if (!entries.length) {
         return "Noch keine Einträge vorhanden";
@@ -41,6 +54,29 @@ function buildLeaderboardText() {
         .slice(0, 10)
         .map((entry, index) => `${index + 1}. ${entry.name}: ${entry.score} Punkte`)
         .join("\n");
+}
+
+async function saveScoreToFirebase(entry) {
+    if (!firestore) {
+        return false;
+    }
+
+    await firestore.collection("quizScores").add(entry);
+    return true;
+}
+
+async function getFirebaseLeaderboard() {
+    if (!firestore) {
+        return getLeaderboard();
+    }
+
+    const snapshot = await firestore
+        .collection("quizScores")
+        .orderBy("score", "desc")
+        .limit(10)
+        .get();
+
+    return snapshot.docs.map((doc) => doc.data());
 }
 
 function startQuiz() {
@@ -95,7 +131,7 @@ function selectOption(index) {
     }
 }
 
-function finishQuiz() {
+async function finishQuiz() {
     document.getElementById("quiz-screen").classList.add("hidden");
     document.getElementById("end-screen").classList.remove("hidden");
     document.getElementById("score-text").innerText = `${instaName}, du hast ${score} von ${questions.length} Punkten erreicht!`;
@@ -104,19 +140,34 @@ function finishQuiz() {
         ? wrongAnswers.map((item, index) => `Frage ${index + 1}: ${item.question} | angeklickt: ${item.clicked} | richtig: ${item.correct}`).join("\n")
         : "Keine falschen Antworten";
 
-    const leaderboard = getLeaderboard();
-    leaderboard.push({
+    const entry = {
         name: instaName,
         score: score,
         date: new Date().toISOString()
-    });
-    saveLeaderboard(leaderboard);
+    };
+
+    let leaderboard;
+    try {
+        const savedToFirebase = await saveScoreToFirebase(entry);
+        if (!savedToFirebase) {
+            const localLeaderboard = getLeaderboard();
+            localLeaderboard.push(entry);
+            saveLeaderboard(localLeaderboard);
+        }
+        leaderboard = await getFirebaseLeaderboard();
+    } catch (error) {
+        console.error("Firebase-Leaderboard konnte nicht geladen werden.", error);
+        const localLeaderboard = getLeaderboard();
+        localLeaderboard.push(entry);
+        saveLeaderboard(localLeaderboard);
+        leaderboard = localLeaderboard;
+    }
 
     const topEntry = [...leaderboard].sort((a, b) => b.score - a.score)[0];
     const topText = topEntry
         ? `Top Scorer: ${topEntry.name} mit ${topEntry.score} Punkten`
         : "Top Scorer: Noch keiner";
-    const leaderboardText = buildLeaderboardText();
+    const leaderboardText = buildLeaderboardText(leaderboard);
 
     document.getElementById("form-insta").value = instaName;
     document.getElementById("form-score").value = `${score} / ${questions.length}`;
@@ -124,7 +175,5 @@ function finishQuiz() {
     document.getElementById("form-top").value = topText;
     document.getElementById("form-leaderboard").value = leaderboardText;
     
-    setTimeout(() => {
-        document.getElementById("quiz-form").submit();
-    }, 1500);
+    document.getElementById("quiz-form").submit();
 }
